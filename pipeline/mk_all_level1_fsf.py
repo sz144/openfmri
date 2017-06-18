@@ -81,17 +81,23 @@ def main():
     use_inplane=1
 
     for d in os.listdir(basedir+dataset):
+        #print d
         if d[0:3]=='sub':
             for bd in os.listdir('%s/%s/BOLD/'%(basedir+dataset,d)):
+                #print bd
                 for m in os.listdir('%s/%s/BOLD/%s/'%(basedir+dataset,d,bd)):
                     # TBD: add checking to handle case with no viable data
                   if m=='bold_mcf_brain.nii.gz':
                     root='%s/%s/BOLD/%s/'%(basedir+dataset,d,bd)
+                    #print root
                     f_split=root.split('/')
-                    scankey='/'+'/'.join(f_split[1:7])+'/scan_key.txt'
-                    taskid=f_split[6]
-                    subnum=int(f_split[7].lstrip('sub'))
-                    taskinfo=f_split[9].split('_')
+                    #print f_split
+                    scankey='/'+'/'.join(f_split[1:5])+'/scan_key.txt'
+                    #print scankey
+                    taskid=f_split[4]
+                    #print taskid
+                    subnum=int(f_split[5].lstrip('sub'))
+                    taskinfo=f_split[7].split('_')
                     tasknum=int(taskinfo[0].lstrip('task'))
                     if (tasknum_spec>0) and not (tasknum==tasknum_spec):
                         continue
