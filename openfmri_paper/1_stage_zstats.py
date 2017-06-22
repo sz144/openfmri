@@ -6,10 +6,11 @@ them into a common directory
 
 import os
 import numpy as N
+#from mvpa2 import cfg
 from mvpa2.misc.fsl import read_fsl_design
 from openfmri_utils import *
 import pickle
-
+'''
 studies=['ds001',
 'ds002',
 'ds003',
@@ -27,10 +28,14 @@ studies=['ds001',
 'ds108',
 'ds109',
 'ds110']
+'''
+studies=['ds003',
+'ds005']
 
-
-basedir='/corral-repl/utexas/poldracklab/openfmri/shared2'
-outdir='/corral-repl/utexas/poldracklab/openfmri/analyses/paper_analysis_May2013/data_prep'
+#basedir='/corral-repl/utexas/poldracklab/openfmri/shared2'
+#outdir='/corral-repl/utexas/poldracklab/openfmri/analyses/paper_analysis_May2013/data_prep'
+basedir='/home/sz144/openfMRI_data/basedir'
+outdir='/home/sz144/openfMRI_data/data_prep'
 
 subctr=0
 outfile=open('get_all_zstats.sh','w')
@@ -58,6 +63,7 @@ for study in studies:
                 ncontrasts=design['fmri(ncon_real)']
                 for c in range(1,ncontrasts+1):
                     cmd='mv %s/reg_standard/stats/zstat%d.nii.gz %s/zstats/%s_subctr%03d_%s_zstat%03d.nii.gz'%(fd,c,basedir,study,subctr,f.replace('.feat',''),c)
+                    #cmd='mv %s/stats/zstat%d.nii.gz %s/zstats/%s_subctr%03d_%s_zstat%03d.nii.gz'%(fd,c,basedir,study,subctr,f.replace('.feat',''),c)
                     #print cmd
                     outfile.write(cmd+'\n')
                     
