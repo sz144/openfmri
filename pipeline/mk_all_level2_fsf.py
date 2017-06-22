@@ -70,7 +70,6 @@ def main():
     featdirs=[]
     subdirs={}
 
-    
     for d in os.listdir(basedir+taskid):
         if d[0:3]=='sub':
             #print 'testing %s/%s/model/model%03d/'%(basedir+taskid,d,modelnum)
@@ -79,8 +78,8 @@ def main():
                 if m[-5:]=='.feat':
                     featdirs.append(m)
                     fs=featdirs[-1]
-                    print fs
                     subnum=int(d.replace('sub',''))
+                    #print subnum
                     if not subdirs.has_key(subnum):
                         subdirs[subnum]={}
                     runnum=int(fs.split('_')[1].split('.')[0].replace('run',''))
@@ -98,6 +97,7 @@ def main():
                   #print 'testing %s/%s/sub%03d/model/model%03d/'%(basedir,taskid,s,modelnum)
                   if os.path.exists('%s/%s/sub%03d/model/model%03d/'%(basedir,taskid,s,modelnum)):
                       fname=mk_level2_fsf(taskid,s,t,subdirs[s][t],basedir,modelnum)
+                      print fname
                       outfile.write('feat %s\n'%fname)
                 
     outfile.close()
@@ -105,7 +105,7 @@ def main():
 
     print 'now launching using:'
     print 'launch -s run_all_level2_%s.sh -n %sl2 -r 02:00:00'%(taskid,taskid)
-    launch_qsub.launch_qsub(script_name='run_all_level2_%s.sh'%taskid,runtime='02:00:00',jobname='%sl2'%taskid,email=False)
+    #launch_qsub.launch_qsub(script_name='run_all_level2_%s.sh'%taskid,runtime='02:00:00',jobname='%sl2'%taskid,email=False)
 
 if __name__ == '__main__':
     main()

@@ -89,22 +89,23 @@ def main():
                     # TBD: add checking to handle case with no viable data
                   if m=='bold_mcf_brain.nii.gz':
                     root='%s/%s/BOLD/%s/'%(basedir+dataset,d,bd)
-                    #print root
+                    print root
                     f_split=root.split('/')
-                    #print f_split
-                    scankey='/'+'/'.join(f_split[1:5])+'/scan_key.txt'
-                    #print scankey
-                    taskid=f_split[4]
-                    #print taskid
-                    subnum=int(f_split[5].lstrip('sub'))
-                    taskinfo=f_split[7].split('_')
+                    print f_split
+                    scankey='/'+'/'.join(f_split[1:6])+'/scan_key.txt'
+                    print scankey
+                    taskid=f_split[5]
+                    print taskid
+                    subnum=int(f_split[6].lstrip('sub'))
+                    taskinfo=f_split[8].split('_')
                     tasknum=int(taskinfo[0].lstrip('task'))
                     if (tasknum_spec>0) and not (tasknum==tasknum_spec):
                         continue
                     runnum=int(taskinfo[1].lstrip('run'))
                     tr=float(load_scankey(scankey)['TR'])
                     # check for inplane
-                    inplane='/'+'/'.join(f_split[1:8])+'/anatomy/inplane001_brain.nii.gz'
+                    inplane='/'+'/'.join(f_split[1:7])+'/anatomy/inplane001_brain.nii.gz'
+                    print inplane
                     if os.path.exists(inplane):
                         use_inplane=1
                     else:
@@ -116,12 +117,12 @@ def main():
 
     print 'now launching all feats:'
     print "find %s/sub*/model/*.fsf |sed 's/^/feat /' > run_all_feats.sh; sh run_all_feats.sh"%taskid
-    f=open('mk_all_level1_%s.sh'%dataset)
-    l=f.readlines()
-    f.close()
-    njobs=len(l)
-    ncores=(njobs/2)*12
-    launch_qsub.launch_qsub(script_name='mk_all_level1_%s.sh'%dataset,runtime='04:00:00',jobname='%sl1'%dataset,email=False,parenv='2way',ncores=ncores)
+    #f=open('mk_all_level1_%s.sh'%dataset)
+    #l=f.readlines()
+    #f.close()
+    #njobs=len(l)
+    #ncores=(njobs/2)*12
+    #launch_qsub.launch_qsub(script_name='mk_all_level1_%s.sh'%dataset,runtime='04:00:00',jobname='%sl1'%dataset,email=False,parenv='2way',ncores=ncores)
 
 
 if __name__ == '__main__':

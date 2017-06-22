@@ -97,7 +97,7 @@ def main():
 
     print 'now launching using:'
     print 'launch -s run_all_level3_%s.sh -n %sl3 -r 01:00:00'%(taskid,taskid)
-    launch_qsub.launch_qsub(script_name='run_all_level3_%s.sh'%taskid,runtime='01:00:00',jobname='%sl3'%taskid,email=False)
+    #launch_qsub.launch_qsub(script_name='run_all_level3_%s.sh'%taskid,runtime='01:00:00',jobname='%sl3'%taskid,email=False)
 
       
 if __name__ == '__main__':
