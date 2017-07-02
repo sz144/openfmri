@@ -33,7 +33,7 @@ additional qa using 2.1_dataqa.py
 
 - then combine them with the command:
 
-fslmaths zstat_run1_goodvoxmask.nii.gz -mul zstat_run2_goodvoxmask.nii.gz goovoxmask.nii.gz
+fslmaths zstat_run1_goodvoxmask.nii.gz -mul zstat_run2_goodvoxmask.nii.gz goodvoxmask.nii.gz
 
 - also create version with no missing subjects:
 fslmaths zstat_run1_missingcount.nii.gz -add zstat_run2_missingcount.nii.gz all_missingcount
